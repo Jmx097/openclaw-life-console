@@ -1,0 +1,69 @@
+# OpenClaw Life Console - Git Ignore
+
+# Private / Sensitive
+IDENTITY.md
+USER.md
+**/auth-profiles.json
+**/secrets*
+**/.env
+**/.env.local
+**/.env.*.local
+.env.example
+
+# Memory / Session Data (transient)
+memory/*.json
+memory/*.log
+!memory/heartbeat-state.json
+!memory/building-queue.json
+!memory/cost-budget.json
+
+# Grafana Data (auto-generated)
+grafana/data/**
+!grafana/data/.gitkeep
+
+# Docker volumes
+**/docker-volumes/
+**/.volumes/
+
+# Logs
+*.log
+logs/
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# Node/Package manager (if added later)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Python (if added later)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.env/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build outputs
+dist/
+build/
+.next/

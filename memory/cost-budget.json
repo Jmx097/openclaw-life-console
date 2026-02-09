@@ -1,0 +1,13 @@
+{
+  "monthlyBudget": 200,
+  "currency": "USD",
+  "alerts": {
+    "info": 0.5,
+    "warning": 0.8,
+    "critical": 1.0
+  },
+  "notify": "+16474011957",
+  "currentSpend": 0,
+  "month": "2026-02",
+  "lastUpdated": "2026-02-08T18:38:00Z"
+}

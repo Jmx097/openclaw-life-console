@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw Relationship Graph</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            overflow: hidden;
+        }
+        
+        #header {
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        #header h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f0f6fc;
+        }
+        
+        #header .meta {
+            font-size: 12px;
+            color: #8b949e;
+        }
+        
+        #controls {
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            padding: 12px 24px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        #controls button {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+        
+        #controls button:hover {
+            background: #30363d;
+            border-color: #8b949e;
+        }
+        
+        #controls button.active {
+            background: #1f6feb;
+            border-color: #1f6feb;
+            color: white;
+        }
+        
+        #controls select {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+        
+        #search-box {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            width: 200px;
+        }
+        
+        #search-box:focus {
+            outline: none;
+            border-color: #1f6feb;
+        }
+        
+        #graph-container {
+            width: 100vw;
+            height: calc(100vh - 120px);
+            position: relative;
+        }
+        
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(13, 17, 23, 0.95);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px;
+            font-size: 12px;
+            max-width: 250px;
+        }
+        
+        #legend h3 {
+            margin-bottom: 12px;
+            font-size: 13px;
+            color: #f0f6fc;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .legend-shape {
+            width: 12px;
+            height: 12px;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        #tooltip {
+            position: absolute;
+            background: rgba(13, 17, 23, 0.98);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 12px;
+            max-width: 300px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        #tooltip h4 {
+            margin-bottom: 8px;
+            color: #f0f6fc;
+        }
+        
+        #tooltip p {
+            margin-bottom: 4px;
+            color: #8b949e;
+        }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 4px;
+        }
+        
+        .status-strong { background: #4CAF50; }
+        .status-warm { background: #FF9800; }
+        .status-cooling { background: #FF5722; }
+        .status-risk { background: #F44336; }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <h1>🧠 OpenClaw Relationship Graph</h1>
+        <div class="meta">
+            <span id="node-count">0 nodes</span> • 
+            <span id="edge-count">0 edges</span> • 
+            <span id="last-updated">Updated: just now</span>
+        </div>
+    </div>
+    
+    <div id="controls">
+        <button onclick="fitGraph()">Fit to Screen</button>
+        <button onclick="resetLayout()">Reset Layout</button>
+        <button onclick="togglePhysics()" id="physics-btn" class="active">Physics: ON</button>
+        <select id="layout-select" onchange="changeLayout()">
+            <option value="force">Force-directed</option>
+            <option value="hierarchical">Hierarchical</option>
+            <option value="circular">Circular</option>
+        </select>
+        <input type="text" id="search-box" placeholder="Search people..." onkeyup="searchNode()">
+        <button onclick="focusCooling()" style="margin-left: auto;">🔥 Show Cooling</button>
+        <button onclick="focusOverdue()">⚠️ Show Overdue</button>
+    </div>
+    
+    <div id="graph-container">
+        <div id="legend">
+            <h3>Legend</h3>
+            <div style="margin-bottom: 12px;">
+                <strong>Categories</strong>
+                <div class="legend-item">
+                    <div class="legend-shape" style="background: #E91E63; transform: rotate(45deg);"></div>
+                    <span>Investor</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-shape" style="background: #9C27B0;"></div>
+                    <span>Client</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-shape" style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 12px solid #FF9800;"></div>
+                    <span>Connector</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-shape" style="background: #00BCD4; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);"></div>
+                    <span>Project</span>
+                </div>
+            </div>
+            <div>
+                <strong>Health</strong>
+                <div class="legend-item">
+                    <div class="legend-color status-strong"></div>
+                    <span>Strong (< 7 days)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color status-warm"></div>
+                    <span>Warm (< 30 days)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color status-cooling"></div>
+                    <span>Cooling (30-60 days)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color status-risk"></div>
+                    <span>At Risk (60+ days)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="tooltip"></div>
+
+    <script type="text/javascript">
+        let network = null;
+        let graphData = { nodes: [], edges: [] };
+        let physicsEnabled = true;
+
+        // Sample data for demonstration
+        const sampleData = {
+            nodes: [
+                { id: 'sarah_chen', label: 'Sarah Chen', title: 'CEO, Meridian Ventures<br>Category: Investor<br>Health: Strong<br>Last contact: 3 days ago', group: 'Investor', color: '#4CAF50', shape: 'diamond', value: 30 },
+                { id: 'priya_sharma', label: 'Priya Sharma', title: 'Founder, TechBridge<br>Category: Connector<br>Health: Strong<br>Last contact: 1 week ago', group: 'Connector', color: '#4CAF50', shape: 'triangle', value: 25 },
+                { id: 'john_smith', label: 'John Smith', title: 'CTO, Acme Corp<br>Category: Client<br>Health: Warm<br>Last contact: 5 days ago', group: 'Client', color: '#FF9800', shape: 'square', value: 20 },
+                { id: 'jane_doe', label: 'Jane Doe', title: 'Ops Manager, Acme Corp<br>Category: Client<br>Health: Warm<br>Last contact: 5 days ago', group: 'Client', color: '#FF9800', shape: 'square', value: 18 },
+                { id: 'david_park', label: 'David Park', title: 'Angel Investor<br>Category: Investor<br>Health: Cooling<br>Last contact: 45 days ago', group: 'Investor', color: '#FF5722', shape: 'diamond', value: 22 },
+                { id: 'series_a', label: 'Series A', title: 'Status: Active<br>Value: $2M target<br>Probability: 30%', group: 'Project', color: '#2196F3', shape: 'hexagon', value: 35 },
+                { id: 'acme_corp', label: 'Acme Corp', title: 'Status: Proposal Sent<br>Value: $3,000/month<br>Probability: 60%', group: 'Project', color: '#2196F3', shape: 'hexagon', value: 28 }
+            ],
+            edges: [
+                { from: 'priya_sharma', to: 'sarah_chen', label: 'introduced', arrows: 'to' },
+                { from: 'sarah_chen', to: 'series_a', label: 'involved in', arrows: 'to' },
+                { from: 'david_park', to: 'series_a', label: 'involved in', arrows: 'to' },
+                { from: 'john_smith', to: 'acme_corp', label: 'involved in', arrows: 'to' },
+                { from: 'jane_doe', to: 'acme_corp', label: 'involved in', arrows: 'to' },
+                { from: 'john_smith', to: 'jane_doe', label: 'colleague', arrows: 'to, from', dashes: true }
+            ]
+        };
+
+        async function loadGraphData() {
+            try {
+                const response = await fetch('graph-data.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    graphData = data.graph;
+                    document.getElementById('last-updated').textContent = 'Updated: ' + new Date(data.generated_at).toLocaleString();
+                } else {
+                    graphData = sampleData;
+                    document.getElementById('last-updated').textContent = 'Using sample data';
+                }
+            } catch (e) {
+                graphData = sampleData;
+                document.getElementById('last-updated').textContent = 'Using sample data';
+            }
+            
+            document.getElementById('node-count').textContent = graphData.nodes.length + ' nodes';
+            document.getElementById('edge-count').textContent = graphData.edges.length + ' edges';
+            
+            initGraph();
+        }
+
+        function initGraph() {
+            const container = document.getElementById('graph-container');
+            
+            const data = {
+                nodes: new vis.DataSet(graphData.nodes),
+                edges: new vis.DataSet(graphData.edges)
+            };
+
+            const options = {
+                nodes: {
+                    font: {
+                        face: '-apple-system, BlinkMacSystemFont, sans-serif',
+                        size: 14,
+                        color: '#f0f6fc'
+                    },
+                    borderWidth: 2,
+                    borderWidthSelected: 4,
+                    shadow: true
+                },
+                edges: {
+                    font: {
+                        size: 10,
+                        color: '#8b949e',
+                        align: 'middle'
+                    },
+                    smooth: {
+                        type: 'continuous'
+                    },
+                    color: {
+                        color: '#30363d',
+                        highlight: '#1f6feb',
+                        hover: '#1f6feb'
+                    }
+                },
+                groups: {
+                    Investor: { color: { background: '#E91E63', border: '#C2185B' } },
+                    Client: { color: { background: '#9C27B0', border: '#7B1FA2' } },
+                    Connector: { color: { background: '#FF9800', border: '#F57C00' } },
+                    Project: { color: { background: '#2196F3', border: '#1976D2' } },
+                    Peer: { color: { background: '#00BCD4', border: '#0097A7' } }
+                },
+                physics: {
+                    enabled: true,
+                    barnesHut: {
+                        gravitationalConstant: -8000,
+                        springConstant: 0.04,
+                        springLength: 150
+                    }
+                },
+                interaction: {
+                    hover: true,
+                    tooltipDelay: 200,
+                    hideEdgesOnDrag: true
+                }
+            };
+
+            network = new vis.Network(container, data, options);
+
+            network.on("click", function (params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = params.nodes[0];
+                    const node = data.nodes.get(nodeId);
+                    showTooltip(params.pointer.DOM, node);
+                } else {
+                    hideTooltip();
+                }
+            });
+
+            network.on("dragStart", function () {
+                hideTooltip();
+            });
+        }
+
+        function showTooltip(position, node) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerHTML = `
+                <h4>${node.label}</h4>
+                <p>${node.title.replace(/\n/g, '<br>')}</p>
+            `;
+            tooltip.style.left = position.x + 20 + 'px';
+            tooltip.style.top = position.y + 'px';
+            tooltip.style.display = 'block';
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').style.display = 'none';
+        }
+
+        function fitGraph() {
+            network.fit({
+                animation: {
+                    duration: 1000,
+                    easingFunction: 'easeInOutQuad'
+                }
+            });
+        }
+
+        function resetLayout() {
+            network.setData({
+                nodes: new vis.DataSet(graphData.nodes),
+                edges: new vis.DataSet(graphData.edges)
+            });
+        }
+
+        function togglePhysics() {
+            physicsEnabled = !physicsEnabled;
+            network.setOptions({ physics: { enabled: physicsEnabled } });
+            document.getElementById('physics-btn').textContent = physicsEnabled ? 'Physics: ON' : 'Physics: OFF';
+            document.getElementById('physics-btn').classList.toggle('active');
+        }
+
+        function changeLayout() {
+            const layout = document.getElementById('layout-select').value;
+            
+            if (layout === 'hierarchical') {
+                network.setOptions({
+                    layout: {
+                        hierarchical: {
+                            direction: 'UD',
+                            sortMethod: 'directed'
+                        }
+                    }
+                });
+            } else if (layout === 'circular') {
+                // Simple circular layout approximation
+                const nodes = graphData.nodes;
+                const radius = 300;
+                const angleStep = (2 * Math.PI) / nodes.length;
+                
+                nodes.forEach((node, i) => {
+                    node.x = radius * Math.cos(i * angleStep);
+                    node.y = radius * Math.sin(i * angleStep);
+                });
+                
+                network.setData({
+                    nodes: new vis.DataSet(nodes),
+                    edges: new vis.DataSet(graphData.edges)
+                });
+                
+                network.setOptions({
+                    physics: { enabled: false }
+                });
+            } else {
+                network.setOptions({
+                    layout: { hierarchical: false }
+                });
+            }
+        }
+
+        function searchNode() {
+            const query = document.getElementById('search-box').value.toLowerCase();
+            
+            if (query.length < 2) {
+                network.unselectAll();
+                return;
+            }
+            
+            const nodes = graphData.nodes.filter(n => 
+                n.label.toLowerCase().includes(query) ||
+                (n.role && n.role.toLowerCase().includes(query))
+            );
+            
+            if (nodes.length > 0) {
+                network.selectNodes(nodes.map(n => n.id));
+                network.focus(nodes[0].id, {
+                    scale: 1.2,
+                    animation: true
+                });
+            }
+        }
+
+        function focusCooling() {
+            const coolingNodes = graphData.nodes.filter(n => 
+                n.color === '#FF5722' || n.color === '#F44336'
+            );
+            
+            if (coolingNodes.length > 0) {
+                network.selectNodes(coolingNodes.map(n => n.id));
+                network.fit({
+                    nodes: coolingNodes.map(n => n.id),
+                    animation: true
+                });
+            } else {
+                alert('No cooling relationships found!');
+            }
+        }
+
+        function focusOverdue() {
+            // In a real implementation, this would filter by overdue commitments
+            // For now, highlight nodes with 'OVERDUE' in their title
+            const overdueNodes = graphData.nodes.filter(n => 
+                n.title && n.title.includes('OVERDUE')
+            );
+            
+            if (overdueNodes.length > 0) {
+                network.selectNodes(overdueNodes.map(n => n.id));
+                network.fit({
+                    nodes: overdueNodes.map(n => n.id),
+                    animation: true
+                });
+            } else {
+                alert('No overdue commitments found!');
+            }
+        }
+
+        // Load graph on startup
+        window.onload = loadGraphData;
+    </script>
+</body>
+</html>

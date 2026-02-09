@@ -1,0 +1,20 @@
+{
+  "lastChecks": {
+    "heartbeat": 1738985213,
+    "morningBrief": 1738997210,
+    "eveningReflection": null,
+    "weeklyReview": 1739027810,
+    "monthlyBrief": 1739027810,
+    "infrastructure": 1738985213,
+    "costMonitor": 1739027810,
+    "buildingQueue": 1739027810,
+    "cronJobs": 1739027810
+  },
+  "systemInitialized": "2026-02-08T04:06:53Z",
+  "nextExpected": {
+    "morningBrief": "2026-02-09T07:00:00Z",
+    "eveningReflection": "2026-02-08T22:00:00Z",
+    "weeklyReview": "2026-02-08T18:00:00Z",
+    "monthlyBrief": "2026-02-08T18:00:00Z"
+  }
+}

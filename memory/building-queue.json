@@ -1,0 +1,124 @@
+{
+  "version": "2026-02-08",
+  "monthlyBudget": {
+    "llmCosts": 200,
+    "allocated": {
+      "infrastructure": 50,
+      "contentCreation": 75,
+      "automationTools": 50,
+      "buffer": 25
+    }
+  },
+  "activeProjects": [
+    {
+      "id": "plinko-sales-system",
+      "name": "Plinko Solutions Sales Pipeline",
+      "priority": 1,
+      "status": "in-progress",
+      "budgetAllocated": 25,
+      "impact": "Direct revenue - $10k MRR target",
+      "tasks": [
+        "✅ Set up CRM (Airtable base configured)",
+        "✅ Configure Cal.com webhook integration",
+        "🔄 Create lead capture forms (Instagram/Reddit/Skool)",
+        "🔄 Build discovery call booking flow",
+        "⏳ Draft proposal templates",
+        "⏳ Set up Make.com webhook handler"
+      ],
+      "tablesCreated": [
+        "Plinko Leads (tblfFstDS4Fyn9Exe)",
+        "Activities (tbl6QswM4V2fcMhqV)",
+        "Deals (tblvPiSJewFEzbYxR)"
+      ],
+      "webhookEndpoint": "https://hook.us1.make.com/hhzxyhjqrlixdnrmbr89sib8u25krnuf",
+      "deadline": "2026-02-15"
+    },
+    {
+      "id": "health-tracking",
+      "name": "Post-Fracture Health Tracking System",
+      "priority": 2,
+      "status": "setup",
+      "budgetAllocated": 0,
+      "impact": "Recovery monitoring - 26M tibia/fibula healing",
+      "tasks": [
+        "Set up weight log spreadsheet",
+        "Create training session tracker",
+        "Build pain/mobility metrics",
+        "Schedule weekly progress photos"
+      ],
+      "deadline": "2026-02-10"
+    },
+    {
+      "id": "finance-dashboard",
+      "name": "Personal Finance Dashboard",
+      "priority": 3,
+      "status": "setup",
+      "budgetAllocated": 15,
+      "impact": "Debt payoff tracking - $21k → $0",
+      "tasks": [
+        "Connect Firefly III or spreadsheet",
+        "Set up monthly budget categories",
+        "Create debt payoff tracker",
+        "Build investment performance log"
+      ],
+      "deadline": "2026-02-20"
+    },
+    {
+      "id": "content-pipeline",
+      "name": "Content Creation Pipeline",
+      "priority": 4,
+      "status": "planning",
+      "budgetAllocated": 50,
+      "impact": "Audience growth → Skool → Leads",
+      "tasks": [
+        "Define content pillars (AI automation, digital literacy)",
+        "Create YouTube script templates",
+        "Set up repurposing workflow (shorts/carousels)",
+        "Build content calendar"
+      ],
+      "deadline": "2026-02-28"
+    },
+    {
+      "id": "time-tracking",
+      "name": "Productivity & Time Tracking",
+      "priority": 5,
+      "status": "setup",
+      "budgetAllocated": 10,
+      "impact": "Deep work optimization - ActivityWatch",
+      "tasks": [
+        "Install ActivityWatch on all devices",
+        "Set up category rules",
+        "Create weekly productivity reports",
+        "Define deep work blocks"
+      ],
+      "deadline": "2026-02-14"
+    },
+    {
+      "id": "trading-system",
+      "name": "Trading Alert System",
+      "priority": 6,
+      "status": "backlog",
+      "budgetAllocated": 25,
+      "impact": "7% monthly return target - swing trading",
+      "tasks": [
+        "Connect Wealthsimple API or manual tracking",
+        "Build entry/exit signal alerts",
+        "Set up risk management rules (2% max/trade)",
+        "Create position sizing calculator"
+      ],
+      "deadline": "2026-03-01"
+    }
+  ],
+  "completedThisWeek": [],
+  "blocked": [],
+  "nextSprint": {
+    "focus": "Revenue systems + Health recovery",
+    "startDate": "2026-02-09",
+    "endDate": "2026-02-16",
+    "top3": [
+      "plinko-sales-system",
+      "health-tracking",
+      "finance-dashboard"
+    ]
+  }
+}
