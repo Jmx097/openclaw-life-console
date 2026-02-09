@@ -3,17 +3,19 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'OpenClaw Life Console',
-  description: 'Personal Life Operating System Dashboard'
+  description: 'Personal Operating System Dashboard',
 }
 
 export default function RootLayout({
-  children
+  children,
 }: {
   children: React.ReactNode
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-gray-900 text-white min-h-screen">
+        {children}
+      </body>
     </html>
   )
 }

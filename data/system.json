@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "domain": "system",
+    "lastUpdated": "2026-02-09T22:57:00Z",
+    "version": "1.0"
+  },
+  "infrastructure": {
+    "openclaw": {
+      "status": "running",
+      "lastHeartbeat": "2026-02-09T22:57:00Z",
+      "version": "latest"
+    },
+    "grafana": {
+      "status": "running",
+      "url": "http://localhost:3000"
+    },
+    "tailscale": {
+      "status": "unknown",
+      "lastCheck": null
+    },
+    "firewall": {
+      "status": "unknown",
+      "lastCheck": null
+    }
+  },
+  "costs": {
+    "llm": {
+      "monthlyBudget": 200,
+      "spent": 0,
+      "remaining": 200,
+      "alertThresholds": {
+        "info": 50,
+        "warning": 80,
+        "stop": 100
+      }
+    },
+    "infrastructure": {
+      "monthly": 0,
+      "breakdown": {}
+    }
+  },
+  "agents": {
+    "active": 1,
+    "completedTasks": 0,
+    "failedTasks": 0
+  },
+  "healthChecks": {
+    "lastRun": null,
+    "status": "unknown",
+    "failures": []
+  },
+  "alerts": [],
+  "nextActions": []
+}

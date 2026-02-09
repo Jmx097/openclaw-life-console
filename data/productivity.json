@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "domain": "productivity",
+    "lastUpdated": "2026-02-09T22:57:00Z",
+    "version": "1.0"
+  },
+  "timeTracking": {
+    "source": "ActivityWatch (future)",
+    "status": "not_connected",
+    "thisWeek": {
+      "deepWorkHours": null,
+      "target": 20,
+      "contextSwitches": null
+    }
+  },
+  "categories": {
+    "deepWork": { "thisWeek": 0, "target": 20 },
+    "admin": { "thisWeek": 0 },
+    "meetings": { "thisWeek": 0 },
+    "learning": { "thisWeek": 0 },
+    "rest": { "thisWeek": 0 }
+  },
+  "goals": {
+    "daily": [
+      "3 hours deep work",
+      "1 workout",
+      "Log meals"
+    ],
+    "weekly": [
+      "20 hours deep work",
+      "4 workouts",
+      "1 content piece"
+    ]
+  },
+  "streaks": {
+    "dailyReflection": 0,
+    "weightLogging": 0,
+    "training": 0
+  },
+  "alerts": [],
+  "nextActions": [
+    {
+      "id": "1",
+      "task": "Install ActivityWatch",
+      "due": "2026-02-14",
+      "priority": "medium"
+    }
+  ]
+}

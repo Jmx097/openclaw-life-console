@@ -1,11 +1,16 @@
 {
   "name": "openclaw-life-console",
-  "version": "1.0.0",
-  "description": "Life Console Dashboard for OpenClaw",
+  "version": "2.0.0",
+  "description": "Life Console Dashboard for OpenClaw - Self-hosted Personal Operating System",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start"
+    "start": "next start -p 3000",
+    "export": "next build",
+    "brief": "node ../automation/morning-brief.js",
+    "reflect": "node ../automation/evening-prompt.js",
+    "weekly": "node ../automation/weekly-review.js",
+    "health": "node ../automation/health-check.js"
   },
   "dependencies": {
     "next": "^14.0.0",

@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "domain": "content",
+    "lastUpdated": "2026-02-09T22:57:00Z",
+    "version": "1.0"
+  },
+  "platforms": {
+    "youtube": {
+      "subscribers": 0,
+      "target": 1000,
+      "thisWeek": { "posts": 0, "views": 0 },
+      "focus": "long-form education + case studies"
+    },
+    "instagram": {
+      "followers": 0,
+      "target": 500,
+      "thisWeek": { "posts": 0, "engagement": 0 },
+      "focus": "shorts + carousels"
+    },
+    "linkedin": {
+      "connections": 0,
+      "target": 500,
+      "thisWeek": { "posts": 0, "engagement": 0 },
+      "focus": "B2B authority"
+    },
+    "reddit": {
+      "karma": 0,
+      "thisWeek": { "posts": 0, "comments": 0 },
+      "focus": "community value"
+    },
+    "skool": {
+      "members": 0,
+      "target": 100,
+      "thisWeek": { "joins": 0, "active": 0 },
+      "focus": "community hub"
+    }
+  },
+  "funnel": {
+    "contentToSkool": 0,
+    "skoolToLead": 0,
+    "leadToCall": 0
+  },
+  "pipeline": {
+    "ideas": [],
+    "inProgress": [],
+    "scheduled": [],
+    "published": []
+  },
+  "thisWeek": {
+    "contentPieces": 0,
+    "target": 3
+  },
+  "alerts": [],
+  "nextActions": [
+    {
+      "id": "1",
+      "task": "Define content pillars",
+      "due": "2026-02-15",
+      "priority": "medium"
+    },
+    {
+      "id": "2",
+      "task": "Create first YouTube script",
+      "due": "2026-02-20",
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "domain": "finance",
+    "lastUpdated": "2026-02-09T22:57:00Z",
+    "version": "1.0"
+  },
+  "debt": {
+    "original": 21000,
+    "remaining": 21000,
+    "paid": 0,
+    "velocity": 0,
+    "projectedPayoff": null,
+    "history": [
+      { "date": "2026-02-01", "remaining": 21000 }
+    ]
+  },
+  "income": {
+    "salary": 5000,
+    "business": 0,
+    "other": 0,
+    "total": 5000
+  },
+  "investments": {
+    "strategy": "swing trading + value investing",
+    "targetMonthlyReturn": 7,
+    "actualMonthlyReturn": null,
+    "riskRules": {
+      "maxPerTrade": 2,
+      "stopLossesRequired": true,
+      "noRevengeTrading": true
+    },
+    "positions": [],
+    "cash": 0
+  },
+  "monthly": {
+    "spend": null,
+    "save": null,
+    "invest": null,
+    "debtPayment": null
+  },
+  "netWorth": null,
+  "alerts": [],
+  "nextActions": [
+    {
+      "id": "1",
+      "task": "Set up Firefly III or finance spreadsheet",
+      "due": "2026-02-20",
+      "priority": "medium"
+    },
+    {
+      "id": "2",
+      "task": "Log first trade",
+      "due": "2026-02-15",
+      "priority": "low"
+    }
+  ]
+}

@@ -67,3 +67,4 @@ temp/
 dist/
 build/
 .next/
+.vercel

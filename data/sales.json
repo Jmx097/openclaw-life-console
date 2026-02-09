@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "domain": "sales",
+    "lastUpdated": "2026-02-09T22:57:00Z",
+    "version": "1.0"
+  },
+  "mrr": {
+    "current": 0,
+    "target": 10000,
+    "startDate": "2026-02-01",
+    "history": [
+      { "date": "2026-02-01", "value": 0 }
+    ]
+  },
+  "pipeline": {
+    "activeDeals": 0,
+    "totalValue": 0,
+    "stages": {
+      "discovery": { "count": 0, "value": 0 },
+      "proposal": { "count": 0, "value": 0 },
+      "negotiation": { "count": 0, "value": 0 }
+    }
+  },
+  "leads": {
+    "thisWeek": 0,
+    "thisMonth": 0,
+    "total": 0,
+    "sources": {
+      "website": 0,
+      "instagram": 0,
+      "reddit": 0,
+      "skool": 0,
+      "email": 0,
+      "outbound": 0,
+      "referral": 0
+    },
+    "conversionRate": 0
+  },
+  "offers": {
+    "scan": { "price": 247, "sold": 0, "revenue": 0 },
+    "build": { "price": 2000, "sold": 0, "revenue": 0 },
+    "care": { "price": 750, "sold": 0, "mrr": 0 }
+  },
+  "activities": {
+    "thisWeek": {
+      "calls": 0,
+      "emails": 0,
+      "proposals": 0
+    }
+  },
+  "alerts": [],
+  "nextActions": [
+    {
+      "id": "1",
+      "task": "Set up Instagram DM capture",
+      "due": "2026-02-10",
+      "priority": "high"
+    },
+    {
+      "id": "2", 
+      "task": "Complete Make.com webhook test",
+      "due": "2026-02-09",
+      "priority": "high"
+    }
+  ]
+}

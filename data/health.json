@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "domain": "health",
+    "lastUpdated": "2026-02-09T22:57:00Z",
+    "version": "1.0"
+  },
+  "profile": {
+    "age": 26,
+    "sex": "M",
+    "recoveryContext": "1 year post tibia/fibula fracture"
+  },
+  "weight": {
+    "current": null,
+    "target": null,
+    "unit": "lbs",
+    "history": [],
+    "lastWeighed": null
+  },
+  "training": {
+    "thisWeek": {
+      "sessions": 0,
+      "target": 4,
+      "adherence": 0
+    },
+    "lastSession": null,
+    "focus": "upper body hypertrophy, low impact cardio",
+    "principles": "Mike Israetel - MEV/MRV tracking"
+  },
+  "recovery": {
+    "painLevel": null,
+    "scale": "0-10",
+    "mobilityScore": null,
+    "gaitQuality": null,
+    "sleepAvg": null,
+    "targetSleep": "7-8h"
+  },
+  "nutrition": {
+    "framework": "PCOS-friendly, insulin-sensitive",
+    "restrictions": ["avocado", "mango"],
+    "targets": {
+      "protein": { "value": 150, "unit": "g", "per": "day" },
+      "fiber": { "min": 25, "max": 35, "unit": "g", "per": "day" }
+    },
+    "thisWeek": {
+      "adherence": null,
+      "proteinAvg": null
+    }
+  },
+  "metrics": {
+    "pullUpMax": null,
+    "pushUpMax": null,
+    "plankTime": null
+  },
+  "alerts": [],
+  "nextActions": [
+    {
+      "id": "1",
+      "task": "Log starting weight",
+      "due": "2026-02-10",
+      "priority": "high"
+    },
+    {
+      "id": "2",
+      "task": "Plan first training session",
+      "due": "2026-02-10",
+      "priority": "high"
+    }
+  ]
+}
