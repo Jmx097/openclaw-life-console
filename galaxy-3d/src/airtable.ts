@@ -1,4 +1,4 @@
-import { Lead } from './store';
+import type { Lead } from './store';
 
 const AIRTABLE_PAT = import.meta.env.VITE_AIRTABLE_PAT || '';
 const AIRTABLE_BASE_ID = import.meta.env.VITE_AIRTABLE_BASE_ID || 'appvoLtkzliuViGvb';

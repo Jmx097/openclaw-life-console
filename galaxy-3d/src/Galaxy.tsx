@@ -1,8 +1,8 @@
 import { useRef, useMemo, useEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars, OrbitControls, Text, Billboard } from '@react-three/drei';
 import * as THREE from 'three';
-import { useGalaxyStore, statusColors, domainPositions, Lead } from './store';
+import { useGalaxyStore, statusColors, domainPositions, type Lead } from './store';
 import { calculateLeadPosition } from './airtable';
 
 // Lead Sphere Component
@@ -85,7 +85,6 @@ function DomainPillar({ domain, position }: { domain: string; position: [number,
 // Galaxy Scene
 function GalaxyScene() {
   const { leads, setSelectedLead } = useGalaxyStore();
-  const { camera } = useThree();
 
   // Calculate positions for all leads
   const leadPositions = useMemo(() => {
