@@ -8,18 +8,44 @@
 
 | Metric | Value |
 |--------|-------|
-| **Active Missions** | 6 |
-| **In Progress** | 1 |
+| **Active Missions** | 7 |
+| **In Progress** | 2 |
 | **Blocked** | 0 |
-| **Completed This Week** | 0 |
-| **Sprint Focus** | Revenue systems + Health recovery |
-| **Sprint Dates** | Feb 9 – Feb 16, 2026 |
+| **Completed This Week** | 1 (Galaxy v1 deployed) |
+| **Sprint Focus** | JARVIS dashboard + Revenue systems |
+| **Sprint Dates** | Feb 11 – Feb 20, 2026 |
 
 ---
 
 ## 🏃 In Progress
 
-### 1. Plinko Solutions Sales Pipeline
+### 1. JARVIS CRM Dashboard (Plinko Galaxy v2)
+**ID:** `jarvis-crm-dashboard` | **Priority:** P1 🔴 | **Deadline:** Feb 20
+
+**Impact:** Flagship Plinko product — demo-ready sales tool  
+**Budget Allocated:** $40
+
+**Scope:** Transform 3D galaxy into Iron Man JARVIS-style CRM interface
+- ❌ Hand tracking (removed — too complex for v1)
+- ✅ Mouse/click interaction for lead selection
+- ✅ JARVIS UI aesthetic (cyan glow, HUD panels, scanlines)
+- ✅ Live Airtable CRM sync
+- ✅ Voice feedback via OpenClaw TTS
+- ✅ Mobile version (Phase 2)
+
+| Phase | Status | Deliverable |
+|-------|--------|-------------|
+| Phase 1: Foundation | 🔄 | JARVIS shell + CSS theme + mock data |
+| Phase 2: Input Layer | ⏳ | Raycasting + lead cards + camera controls |
+| Phase 3: Live Data | ⏳ | Airtable sync + real leads |
+| Phase 4: Voice + Polish | ⏳ | TTS integration + animations + deploy |
+| Phase 5: Mobile | ⏳ | Touch gestures + responsive layout |
+
+**Current Status:** 3D galaxy built, deployed at https://galaxy-3d-six.vercel.app. Bugfix complete (data now loading). Ready for JARVIS styling.
+
+---
+
+### 2. Plinko Solutions Sales Pipeline
 **ID:** `plinko-sales-system` | **Priority:** P1 🔴 | **Deadline:** Feb 15
 
 **Impact:** Direct revenue — $10k MRR target  
@@ -142,11 +168,11 @@
 
 ---
 
-## 🎯 Sprint Priorities (Feb 9-16)
+## 🎯 Sprint Priorities (Feb 11-20)
 
-1. **Plinko Sales System** — Complete lead capture setup
-2. **Health Tracking** — Start daily logging
-3. **Finance Dashboard** — Connect data sources
+1. **JARVIS CRM Dashboard** — Complete Phase 1-4 (desktop version)
+2. **Plinko Sales System** — Complete lead capture setup
+3. **Health Tracking** — Start daily logging (stretch goal)
 
 ---
 
@@ -170,4 +196,4 @@
 
 ---
 
-*Last updated: 2026-02-09*
+*Last updated: 2026-02-11*
