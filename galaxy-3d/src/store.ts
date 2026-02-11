@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { fetchLeadsFromAirtable } from './airtable';
 
 export interface Lead {
   id: string;
@@ -44,9 +45,8 @@ export const useGalaxyStore = create<GalaxyState>((set) => ({
   refreshData: async () => {
     set({ isLoading: true });
     try {
-      const response = await fetch('/api/leads');
-      const data = await response.json();
-      set({ leads: data.leads, lastUpdated: new Date(), isLoading: false });
+      const leads = await fetchLeadsFromAirtable();
+      set({ leads, lastUpdated: new Date(), isLoading: false });
     } catch (error) {
       console.error('Failed to fetch leads:', error);
       set({ isLoading: false });
